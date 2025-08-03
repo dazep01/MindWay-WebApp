@@ -803,6 +803,88 @@
                 font-size: 40px;
             }
         }
+
+        /* Tambahan untuk modal konfirmasi */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #4361ee;
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #4cc9f0;
+        }
+        
+        .modal p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .modal-confirm {
+            background: #4361ee;
+            color: white;
+        }
+        
+        .modal-confirm:hover {
+            background: #3a56d4;
+            transform: translateY(-3px);
+        }
+        
+        .modal-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .modal-cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        
+        .user-info strong {
+            color: #4cc9f0;
+        }
     </style>
 </head>
 <body>
@@ -1185,7 +1267,32 @@
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
-
+    
+    <!-- Modal Konfirmasi -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-check-circle"></i> Konfirmasi Tes</h2>
+            
+            <div class="user-info">
+                <p>Nama: <strong id="confirmName"></strong></p>
+                <p>Usia: <strong id="confirmAge"></strong></p>
+                <p>Tujuan: <strong id="confirmPurpose"></strong></p>
+            </div>
+            
+            <p>Anda akan memulai tes kognitif yang terdiri dari 50 pertanyaan. Durasi tes diperkirakan 20-30 menit.</p>
+            
+            <p><i class="fas fa-info-circle"></i> Pastikan Anda dalam kondisi nyaman dan fokus sebelum memulai.</p>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn modal-cancel" id="cancelBtn">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+                <button class="modal-btn modal-confirm" id="confirmBtn">
+                    <i class="fas fa-play"></i> Mulai Tes
+                </button>
+            </div>
+        </div>
+    </div>
     <script>
         // Mobile Navigation Toggle
         const mobileToggle = document.getElementById('mobileToggle');
@@ -1209,21 +1316,138 @@
                 document.body.style.overflow = '';
             });
         });
-        
-        // Start assessment function
+
+        // Fungsi untuk memulai tes
         function startAssessment() {
             const name = document.getElementById('name').value;
             const age = document.getElementById('age').value;
+            const purpose = document.getElementById('purpose').value;
             
-            if (!name || !age) {
-                alert('Harap lengkapi nama dan usia Anda sebelum memulai tes.');
+            if (!name || !age || purpose === "") {
+                // Tampilkan pesan error lebih spesifik
+                let errorMessage = "Harap lengkapi:";
+                if (!name) errorMessage += "\n- Nama";
+                if (!age) errorMessage += "\n- Usia";
+                if (purpose === "") errorMessage += "\n- Tujuan";
+                
+                showErrorModal(errorMessage);
                 return;
             }
             
-            alert(`Hai ${name}! Anda akan diarahkan ke halaman tes. Selamat mengerjakan!`);
-            // In a real implementation, this would redirect to the test page
-            // window.location.href = 'test.html';
+            // Tampilkan modal konfirmasi
+            showConfirmationModal(name, age, purpose);
         }
+        
+        // Tampilkan modal konfirmasi
+        function showConfirmationModal(name, age, purpose) {
+            const modal = document.getElementById('confirmationModal');
+            const confirmName = document.getElementById('confirmName');
+            const confirmAge = document.getElementById('confirmAge');
+            const confirmPurpose = document.getElementById('confirmPurpose');
+            
+            // Isi data pengguna
+            confirmName.textContent = name;
+            confirmAge.textContent = age;
+            confirmPurpose.textContent = getPurposeText(purpose);
+            
+            // Tampilkan modal
+            modal.style.display = 'flex';
+            
+            // Handle tombol konfirmasi
+            document.getElementById('confirmBtn').onclick = function() {
+                saveUserDataAndRedirect(name, age, purpose);
+            };
+            
+            // Handle tombol batal
+            document.getElementById('cancelBtn').onclick = function() {
+                modal.style.display = 'none';
+            };
+        }
+        
+        // Tampilkan modal error
+        function showErrorModal(message) {
+            const modal = document.getElementById('confirmationModal');
+            const modalContent = modal.querySelector('.modal-content');
+            
+            // Ubah isi modal untuk menampilkan pesan error
+            modalContent.innerHTML = `
+                <h2><i class="fas fa-exclamation-triangle"></i> Data Belum Lengkap</h2>
+                <p style="white-space: pre-line;">${message}</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-confirm" id="closeErrorBtn">
+                        <i class="fas fa-check"></i> Mengerti
+                    </button>
+                </div>
+            `;
+            
+            // Tampilkan modal
+            modal.style.display = 'flex';
+            
+            // Handle tombol tutup
+            document.getElementById('closeErrorBtn').onclick = function() {
+                modal.style.display = 'none';
+            };
+        }
+        
+        // Dapatkan teks tujuan
+        function getPurposeText(purposeValue) {
+            const purposes = {
+                "self": "Pengenalan Diri",
+                "education": "Pemilihan Jurusan",
+                "career": "Perencanaan Karir",
+                "interest": "Ketertarikan Pribadi"
+            };
+            return purposes[purposeValue] || purposeValue;
+        }
+        
+        // Simpan data dan redirect
+        function saveUserDataAndRedirect(name, age, purpose) {
+            // Simpan data ke localStorage
+            const userData = {
+                name: name,
+                age: age,
+                purpose: purpose,
+                startTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('mindwayUserData', JSON.stringify(userData));
+            
+            // Redirect ke halaman tes
+            window.location.href = 'test.html';
+        }
+        
+        // Event listener untuk modal
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Event listener untuk tombol mulai tes di form
+        document.querySelector('.btn[onclick="startAssessment()"]').addEventListener('click', startAssessment);
+        
+        // Event listener untuk tekan Enter di form
+        document.querySelectorAll('#assessment input, #assessment select').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startAssessment();
+                }
+            });
+        });
+    
+    // Simpan data pengguna ke localStorage
+    const userData = {
+        name: name,
+        age: age,
+        purpose: purpose,
+        startTime: new Date().toISOString()
+    };
+    localStorage.setItem('mindwayUserData', JSON.stringify(userData));
+    
+    // Redirect ke halaman tes
+    window.location.href = 'test.html';
+}
         
         // Back to top button
         const backToTop = document.getElementById('backToTop');
