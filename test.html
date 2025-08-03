@@ -5,45 +5,1012 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tes Kognitif - MINDWAY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --darker: #0d0d1a;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --card-bg: rgba(30, 30, 60, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+            --shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-attachment: fixed;
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .test-header {
+            background: rgba(10, 10, 24, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin-left: 20px;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .progress-bar-bg {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            width: 0%;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .question-number {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .question-statement {
+            font-size: 20px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            padding: 18px 20px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .option-btn.selected {
+            background: rgba(67, 97, 238, 0.3);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(72, 149, 239, 0.3);
+        }
+        
+        .option-btn.selected::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--success);
+        }
+        
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .nav-btn.next {
+            background: var(--secondary);
+            margin-left: auto;
+        }
+        
+        .nav-btn.next:hover {
+            background: #60109c;
+        }
+        
+        .nav-btn.finish {
+            background: var(--success);
+            padding: 16px 40px;
+        }
+        
+        .nav-btn.finish:hover {
+            background: #3db0d6;
+        }
+        
+        .nav-btn i {
+            font-size: 18px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .test-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .progress-container {
+                width: 100%;
+                margin-left: 0;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
+            
+            .question-statement {
+                font-size: 18px;
+            }
+            
+            .option-btn {
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <!-- Header minimalis -->
-        <div class="test-header">
+    <!-- Header Tes -->
+    <header class="test-header">
+        <div class="logo-container">
             <div class="logo">MW</div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
+            <div class="logo-text">MINDWAY</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-info">
                 <span id="progressText">Soal 1/50</span>
+                <span id="categoryText">HBDI</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
         </div>
     </header>
 
+    <!-- Area Tes Utama -->
     <main class="test-container">
         <div class="question-card">
+            <div class="question-number">Pertanyaan <span id="currentQuestion">1</span></div>
             <div class="question-statement" id="questionStatement">
-                <!-- Pertanyaan akan dimuat dinamis -->
+                <!-- Pertanyaan akan dimuat di sini -->
             </div>
             
             <div class="options" id="optionsContainer">
-                <!-- Opsi jawaban -->
+                <!-- Opsi jawaban akan dimuat di sini -->
             </div>
         </div>
-
+        
         <div class="navigation">
-            <button id="prevBtn" disabled>
+            <button class="nav-btn" id="prevBtn" disabled>
                 <i class="fas fa-arrow-left"></i> Sebelumnya
             </button>
-            <button id="nextBtn">
+            <button class="nav-btn next" id="nextBtn">
                 Selanjutnya <i class="fas fa-arrow-right"></i>
             </button>
-            <button id="submitBtn" class="hidden">
+            <button class="nav-btn finish" id="submitBtn" style="display: none;">
                 Selesai <i class="fas fa-check"></i>
             </button>
         </div>
     </main>
 
-    <script src="data/questions.json"></script>
-    <script src="assets/js/app.js"></script>
+    <script>
+        // Data soal (dalam aplikasi nyata akan diambil dari file JSON)
+        const questions = [
+            // HBDI (12 soal)
+            {
+                "id": 1,
+                "statement": "Aku senang belajar tentang angka dan sains.",
+                "category": "HBDI",
+                "dimension": "Quadrant A (Logical)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 2,
+                "statement": "Aku suka membuat rencana sebelum mengerjakan tugas.",
+                "category": "HBDI",
+                "dimension": "Quadrant B (Organized)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 3,
+                "statement": "Aku suka bekerja dalam kelompok dengan teman-teman.",
+                "category": "HBDI",
+                "dimension": "Quadrant C (Interpersonal)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 4,
+                "statement": "Aku suka membayangkan cerita atau gambar di kepalaku.",
+                "category": "HBDI",
+                "dimension": "Quadrant D (Imaginative)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 5,
+                "statement": "Memecahkan teka-teki angka itu menyenangkan.",
+                "category": "HBDI",
+                "dimension": "Quadrant A (Logical)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 6,
+                "statement": "Aku selalu merapikan mainan setelah bermain.",
+                "category": "HBDI",
+                "dimension": "Quadrant B (Organized)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 7,
+                "statement": "Aku peduli jika ada teman yang sedih.",
+                "category": "HBDI",
+                "dimension": "Quadrant C (Interpersonal)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 8,
+                "statement": "Aku suka berimajinasi menjadi pahlawan super.",
+                "category": "HBDI",
+                "dimension": "Quadrant D (Imaginative)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 9,
+                "statement": "Aku suka mencari tahu bagaimana benda-benda bekerja.",
+                "category": "HBDI",
+                "dimension": "Quadrant A (Logical)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 10,
+                "statement": "Aku lebih suka tugas yang jelas langkah-langkahnya.",
+                "category": "HBDI",
+                "dimension": "Quadrant B (Organized)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 11,
+                "statement": "Aku senang membantu orang lain tanpa diminta.",
+                "category": "HBDI",
+                "dimension": "Quadrant C (Interpersonal)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 12,
+                "statement": "Aku suka membuat cerita atau gambar yang aneh dan lucu.",
+                "category": "HBDI",
+                "dimension": "Quadrant D (Imaginative)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            
+            // VARK (8 soal)
+            {
+                "id": 13,
+                "statement": "Aku lebih mudah mengerti dengan gambar daripada penjelasan lisan.",
+                "category": "VARK",
+                "dimension": "Visual",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 14,
+                "statement": "Aku suka mendengarkan cerita dari audio buku.",
+                "category": "VARK",
+                "dimension": "Aural",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 15,
+                "statement": "Membaca instruksi membuatku lebih mengerti.",
+                "category": "VARK",
+                "dimension": "Read/Write",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 16,
+                "statement": "Aku belajar paling baik dengan mencoba langsung.",
+                "category": "VARK",
+                "dimension": "Kinesthetic",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 17,
+                "statement": "Diagram dan peta membantu aku memahami.",
+                "category": "VARK",
+                "dimension": "Visual",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 18,
+                "statement": "Mendengarkan penjelasan guru lebih mudah daripada membaca buku.",
+                "category": "VARK",
+                "dimension": "Aural",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 19,
+                "statement": "Aku suka membuat catatan saat belajar.",
+                "category": "VARK",
+                "dimension": "Read/Write",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 20,
+                "statement": "Bermain peran membantu aku memahami pelajaran.",
+                "category": "VARK",
+                "dimension": "Kinesthetic",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            
+            // CSI (8 soal)
+            {
+                "id": 21,
+                "statement": "Aku lebih suka ide baru daripada cara yang biasa.",
+                "category": "CSI",
+                "dimension": "Intuitive",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 22,
+                "statement": "Mengerjakan tugas sesuai petunjuk itu penting.",
+                "category": "CSI",
+                "dimension": "Analytical",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 23,
+                "statement": "Aku suka mencoba cara berbeda dalam mengerjakan sesuatu.",
+                "category": "CSI",
+                "dimension": "Intuitive",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 24,
+                "statement": "Aku lebih suka hal yang sudah aku kuasai dengan baik.",
+                "category": "CSI",
+                "dimension": "Analytical",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 25,
+                "statement": "Mengikuti peraturan itu membosankan.",
+                "category": "CSI",
+                "dimension": "Intuitive",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 26,
+                "statement": "Aku suka ketika ada langkah-langkah jelas untuk diikuti.",
+                "category": "CSI",
+                "dimension": "Analytical",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 27,
+                "statement": "Memecahkan masalah tanpa petunjuk itu menyenangkan.",
+                "category": "CSI",
+                "dimension": "Intuitive",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 28,
+                "statement": "Aku lebih suka hal yang pasti daripada mencoba hal baru.",
+                "category": "CSI",
+                "dimension": "Analytical",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            
+            // MBTI (16 soal)
+            {
+                "id": 29,
+                "statement": "Aku senang menjadi pusat perhatian.",
+                "category": "MBTI",
+                "dimension": "Extraversion (E)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 30,
+                "statement": "Aku butuh waktu sendiri untuk mengembalikan energi.",
+                "category": "MBTI",
+                "dimension": "Introversion (I)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 31,
+                "statement": "Aku memperhatikan detail-detail kecil.",
+                "category": "MBTI",
+                "dimension": "Sensing (S)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 32,
+                "statement": "Aku suka membayangkan kemungkinan-kemungkinan baru.",
+                "category": "MBTI",
+                "dimension": "Intuition (N)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 33,
+                "statement": "Kebenaran lebih penting daripada menjaga perasaan orang.",
+                "category": "MBTI",
+                "dimension": "Thinking (T)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 34,
+                "statement": "Aku tidak suka melihat orang lain sedih.",
+                "category": "MBTI",
+                "dimension": "Feeling (F)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 35,
+                "statement": "Aku suka membuat daftar apa yang harus dilakukan.",
+                "category": "MBTI",
+                "dimension": "Judging (J)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 36,
+                "statement": "Aku lebih suka bersikap fleksibel daripada punya jadwal ketat.",
+                "category": "MBTI",
+                "dimension": "Perceiving (P)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 37,
+                "statement": "Bertemu orang baru membuatku bersemangat.",
+                "category": "MBTI",
+                "dimension": "Extraversion (E)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 38,
+                "statement": "Aku perlu waktu lama untuk merasa nyaman dengan orang baru.",
+                "category": "MBTI",
+                "dimension": "Introversion (I)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 39,
+                "statement": "Aku memperhatikan perubahan kecil di sekitarku.",
+                "category": "MBTI",
+                "dimension": "Sensing (S)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 40,
+                "statement": "Aku suka membicarakan ide-ide aneh.",
+                "category": "MBTI",
+                "dimension": "Intuition (N)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 41,
+                "statement": "Memutuskan sesuatu harus berdasarkan logika.",
+                "category": "MBTI",
+                "dimension": "Thinking (T)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 42,
+                "statement": "Harmoni dalam kelompok sangat penting bagiku.",
+                "category": "MBTI",
+                "dimension": "Feeling (F)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 43,
+                "statement": "Aku suka menyelesaikan pekerjaan sebelum bermain.",
+                "category": "MBTI",
+                "dimension": "Judging (J)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": false
+            },
+            {
+                "id": 44,
+                "statement": "Aku suka punya banyak pilihan terbuka.",
+                "category": "MBTI",
+                "dimension": "Perceiving (P)",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            
+            // Additional (6 soal: Reverse + lie scale)
+            {
+                "id": 45,
+                "statement": "Aku selalu mengatakan yang sebenarnya dalam setiap situasi.",
+                "category": "Additional",
+                "dimension": "Lie Scale",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": true
+            },
+            {
+                "id": 46,
+                "statement": "Aku tidak pernah lupa mengerjakan PR.",
+                "category": "Additional",
+                "dimension": "Lie Scale",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": true
+            },
+            {
+                "id": 47,
+                "statement": "Aku tidak pernah merasa iri pada teman.",
+                "category": "Additional",
+                "dimension": "Lie Scale",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": false,
+                "lie_scale": true
+            },
+            {
+                "id": 48,
+                "statement": "Aku tidak suka membantu orang lain.",
+                "category": "Additional",
+                "dimension": "Reverse Scoring",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 49,
+                "statement": "Belajar hal baru itu membosankan.",
+                "category": "Additional",
+                "dimension": "Reverse Scoring",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            },
+            {
+                "id": 50,
+                "statement": "Aku tidak peduli pada perasaan teman.",
+                "category": "Additional",
+                "dimension": "Reverse Scoring",
+                "option": ["Sangat Tidak Setuju", "Tidak Setuju", "Netral", "Setuju", "Sangat Setuju"],
+                "value": [1, 2, 3, 4, 5],
+                "reverse": true,
+                "lie_scale": false
+            }
+        ];
+
+        // Variabel state aplikasi
+        let currentQuestionIndex = 0;
+        let userAnswers = Array(questions.length).fill(null);
+        let currentCategory = questions[0].category;
+
+        // Elemen DOM
+        const questionStatementEl = document.getElementById('questionStatement');
+        const optionsContainerEl = document.getElementById('optionsContainer');
+        const currentQuestionEl = document.getElementById('currentQuestion');
+        const progressTextEl = document.getElementById('progressText');
+        const categoryTextEl = document.getElementById('categoryText');
+        const progressBarEl = document.getElementById('progressBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Inisialisasi tes
+        function initTest() {
+            // Muat pertanyaan pertama
+            loadQuestion(currentQuestionIndex);
+            
+            // Set event listener untuk tombol navigasi
+            prevBtn.addEventListener('click', goToPreviousQuestion);
+            nextBtn.addEventListener('click', goToNextQuestion);
+            submitBtn.addEventListener('click', finishTest);
+        }
+
+        // Muat pertanyaan berdasarkan indeks
+        function loadQuestion(index) {
+            const question = questions[index];
+            
+            // Update tampilan pertanyaan
+            questionStatementEl.textContent = question.statement;
+            currentQuestionEl.textContent = index + 1;
+            currentCategory = question.category;
+            
+            // Update progress bar
+            updateProgressBar(index);
+            
+            // Update kategori pertanyaan
+            categoryTextEl.textContent = question.category;
+            
+            // Render opsi jawaban
+            renderOptions(question.option, index);
+            
+            // Update state tombol navigasi
+            updateNavigationButtons(index);
+        }
+
+        // Render opsi jawaban
+        function renderOptions(options, questionIndex) {
+            optionsContainerEl.innerHTML = '';
+            
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+            
+            options.forEach((option, optionIndex) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.classList.add('option-btn');
+                
+                // Tandai jawaban yang sudah dipilih
+                if (userAnswers[questionIndex] === optionIndex) {
+                    optionBtn.classList.add('selected');
+                }
+                
+                optionBtn.innerHTML = `
+                    <span class="option-letter">${letters[optionIndex]}</span>
+                    <span class="option-text">${option}</span>
+                `;
+                
+                optionBtn.addEventListener('click', () => selectOption(optionIndex, questionIndex));
+                optionsContainerEl.appendChild(optionBtn);
+            });
+        }
+
+        // Pilih opsi jawaban
+        function selectOption(optionIndex, questionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Render ulang opsi untuk menampilkan pilihan
+            renderOptions(questions[questionIndex].option, questionIndex);
+            
+            // Otomatis lanjut ke pertanyaan berikutnya jika bukan yang terakhir
+            if (questionIndex === currentQuestionIndex && questionIndex < questions.length - 1) {
+                setTimeout(() => goToNextQuestion(), 300);
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar(currentIndex) {
+            const progress = ((currentIndex + 1) / questions.length) * 100;
+            progressBarEl.style.width = `${progress}%`;
+            progressTextEl.textContent = `Soal ${currentIndex + 1}/${questions.length}`;
+        }
+
+        // Update tombol navigasi
+        function updateNavigationButtons(index) {
+            // Tombol sebelumnya
+            prevBtn.disabled = index === 0;
+            
+            // Tombol selanjutnya
+            nextBtn.style.display = index < questions.length - 1 ? 'flex' : 'none';
+            
+            // Tombol selesai
+            submitBtn.style.display = index === questions.length - 1 ? 'flex' : 'none';
+        }
+
+        // Navigasi ke pertanyaan sebelumnya
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Navigasi ke pertanyaan berikutnya
+        function goToNextQuestion() {
+            // Validasi jika pertanyaan saat ini belum dijawab
+            if (userAnswers[currentQuestionIndex] === null) {
+                alert('Silakan pilih jawaban sebelum melanjutkan');
+                return;
+            }
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Selesaikan tes
+        function finishTest() {
+            // Validasi jika pertanyaan terakhir belum dijawab
+            if (userAnswers[questions.length - 1] === null) {
+                alert('Silakan pilih jawaban sebelum menyelesaikan tes');
+                return;
+            }
+            
+            // Simpan jawaban di localStorage
+            localStorage.setItem('mindwayAnswers', JSON.stringify({
+                answers: userAnswers,
+                timestamp: new Date().toISOString()
+            }));
+            
+            // Redirect ke halaman hasil
+            alert('Tes selesai! Anda akan diarahkan ke halaman hasil.');
+            // window.location.href = 'result.html';
+        }
+
+        // Jalankan aplikasi saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', initTest);
+    </script>
 </body>
 </html>
