@@ -63,9 +63,82 @@ Kami menjembatani antara:
 - Teori psikologi populer dan pengalaman nyata  
 - Sains dan spiritualitas dalam memahami diri
 
-Kami percaya bahwa refleksi bukan milik satu profesi — tapi hak semua manusia yang ingin tumbuh.
+Kami percaya bahwa **refleksi bukan milik satu profesi — tapi hak semua manusia yang ingin tumbuh**.
 
 ---
 
 Dengan cinta dan neuron yang berdenyut ✨  
+~ **dazep01**
+
+
+---
+
+
+# 🧠 MindWay-WebApp
+**Cognitive Personality Insight Assessment**
+
+Welcome to my small personal project — a reflective web app designed to deliver a simple, interactive psychometric experience.
+
+This app emerged from a personal journey of exploring psychology — particularly in the areas of psychological measurement, psychometric instrumentation, and test construction.
+
+It began with a fascination for how psychological theories can be translated into digital tools, and grew through self-directed learning, open literature studies, and an ongoing curiosity about how humans understand themselves through numbers, choices, and inner reflection.
+
+---
+
+## 📁 License Structure
+
+### 🔧 Source Code
+**License:**  [MIT License](LICENSE)
+→ Free to use, modify, and develop by anyone.
+
+### 📚 Psychometric Content & Materials
+**License**: [CC BY-NC 4.0](LICENSE-content.md)
+→ Free to use and adapt, **as long as it’s not for commercial purposes**.
+
+
+---
+
+## 🎨 About the Development Process
+
+This project was developed independently, born from a spirit of autodidactic exploration in both psychology and technology — without any formal academic degree in either.
+
+The entire process, including:
+
+- Studying open-access literature on psychometrics
+- Designing and adapting test instruments
+- Writing and organizing program logic
+- Developing UI/UX interactions
+- And structuring the app as a cohesive whole
+
+...was conducted independently using publicly available and open-source resources.
+
+Throughout the process, I also used AI-based tools such as **ChatGPT (OpenAI)** and **DeepSeek for** idea generation, debugging, and conceptual support.
+
+However, all core **ideas, design principles, and development directions were self-driven** — rooted in personal interpretation, reflection, and creative adaptation of widely available psychological frameworks.
+
+---
+
+## ⚠️ Disclaimer
+
+> This app **is not a formal diagnostic tool, nor is it validated as a clinical instrument**.
+> Test outcomes are **not guaranteed to be fully accurate or scientifically validated**, as they are based on self-study, generalized theory, and creative adaptation of psychometric principles.
+> It is **best understood as a personal, exploratory psychometric simulation**, designed for non-clinical use.
+
+If you intend to use this app in educational, research, or clinical contexts, independent re-validation and expert consultation are strongly encouraged.
+
+---
+
+## 🧭 Positioning & Perspective
+
+MindWay is not an official psychological service, but a reflective digital space inspired by theory and insight. It exists to bridge the gap between:
+
+- Academia and self-learners
+- Popular psychology and lived experience
+- Science and spirituality in the journey toward self-understanding
+
+We believe that **meaningful reflection is not reserved for professionals — it belongs to anyone who dares to grow**.
+
+---
+
+With love and firing neurons ✨
 ~ **dazep01**
