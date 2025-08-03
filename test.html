@@ -878,6 +878,30 @@
         const nextBtn = document.getElementById('nextBtn');
         const submitBtn = document.getElementById('submitBtn');
 
+        // Di bagian atas script test.html
+        document.addEventListener('DOMContentLoaded', function() {
+       // Ambil data pengguna dari localStorage
+        const userData = JSON.parse(localStorage.getItem('mindwayUserData'));
+    
+        if (!userData) {
+            // Jika tidak ada data, redirect kembali ke halaman utama
+            alert('Data pengguna tidak ditemukan. Silakan mulai tes dari halaman utama.');
+            window.location.href = 'index.html';
+            return;
+        }
+    
+    // Tampilkan nama pengguna di header tes (opsional)
+    const userNameEl = document.createElement('div');
+    userNameEl.textContent = userData.name;
+    userNameEl.style.marginLeft = 'auto';
+    userNameEl.style.padding = '5px 15px';
+    userNameEl.style.background = 'rgba(255, 255, 255, 0.1)';
+    userNameEl.style.borderRadius = '20px';
+    document.querySelector('.test-header').appendChild(userNameEl);
+    
+    // Lanjutkan inisialisasi tes
+    initTest();
+});
         // Inisialisasi tes
         function initTest() {
             // Muat pertanyaan pertama
