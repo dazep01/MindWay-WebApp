@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Tes - MINDWAY</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">MW</div>
+        <h1>Hasil Tes Kognitif Anda</h1>
+    </header>
+
+    <main class="result-container">
+        <div class="profile-card">
+            <h2 id="profileTitle">The Logic Sculptor</h2>
+            <p id="profileDesc">Tegas, logis, sistematis — perancang dunia dengan ketelitian tajam.</p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="brainChart"></canvas>
+        </div>
+
+        <div class="detailed-results">
+            <!-- Tampilkan hasil per kategori -->
+        </div>
+
+        <div class="recommendations">
+            <h3>Rekomendasi untuk Anda</h3>
+            <div id="recommendations"></div>
+        </div>
+
+        <div class="actions">
+            <button id="downloadBtn">
+                <i class="fas fa-download"></i> Unduh Hasil (PDF)
+            </button>
+            <button id="retakeBtn">
+                <i class="fas fa-redo"></i> Ulangi Tes
+            </button>
+        </div>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/pdf.js"></script>
+</body>
+</html>
