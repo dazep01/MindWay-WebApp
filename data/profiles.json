@@ -1,1 +1,134 @@
-
+[
+    {
+        "name": "The Logic Sculptor",
+        "description": "Tegas, logis, sistematis — perancang dunia dengan ketelitian tajam.",
+        "profile_vector": {
+            "leftBrain": 90,
+            "rightBrain": 10,
+            "vark": "Read/Write",
+            "cognitive": "Analitik",
+            "mbti": { "T": 90, "F": 10, "J": 80, "P": 20 }
+        }
+    },
+    {
+        "name": "The Insight Weaver",
+        "description": "Penenun makna dari simbol dan bayangan — reflektif, visual, dan intuitif.",
+        "profile_vector": {
+            "leftBrain": 25,
+            "rightBrain": 75,
+            "vark": "Visual",
+            "cognitive": "Intuitif",
+            "mbti": { "T": 30, "F": 70, "J": 40, "P": 60 }
+        }
+    },
+    {
+        "name": "Grounded Visionary",
+        "description": "Berpijak di bumi, bermimpi di langit — seimbang dan fleksibel.",
+        "profile_vector": {
+            "leftBrain": 50,
+            "rightBrain": 50,
+            "vark": "Auditory",
+            "cognitive": "Hybrid",
+            "mbti": { "T": 55, "F": 45, "J": 50, "P": 50 }
+        }
+    },
+    {
+        "name": "Emotional Engineer",
+        "description": "Merancang sistem dengan empati — kombinasi unik logika dan rasa.",
+        "profile_vector": {
+            "leftBrain": 40,
+            "rightBrain": 60,
+            "vark": "Auditory",
+            "cognitive": "Intuitif",
+            "mbti": { "T": 50, "F": 50, "J": 60, "P": 40 }
+        }
+    },
+    {
+        "name": "Methodical Muse",
+        "description": "Penyair teratur — kreatif namun tertata, lembut namun strategis.",
+        "profile_vector": {
+            "leftBrain": 70,
+            "rightBrain": 30,
+            "vark": "Visual",
+            "cognitive": "Intuitif",
+            "mbti": { "T": 40, "F": 60, "J": 85, "P": 15 }
+        }
+    },
+    {
+        "name": "Empathic Explorer",
+        "description": "Penjelajah rasa dan gerak — mencerap dunia lewat pengalaman.",
+        "profile_vector": {
+            "leftBrain": 30,
+            "rightBrain": 70,
+            "vark": "Kinesthetic",
+            "cognitive": "Intuitif",
+            "mbti": { "T": 20, "F": 80, "J": 30, "P": 70 }
+        }
+    },
+    {
+        "name": "Structured Dreamer",
+        "description": "Pemimpi besar yang menapaki langkahnya satu demi satu.",
+        "profile_vector": {
+            "leftBrain": 60,
+            "rightBrain": 40,
+            "vark": "Read/Write",
+            "cognitive": "Hybrid",
+            "mbti": { "T": 60, "F": 40, "J": 75, "P": 25 }
+        }
+    },
+    {
+        "name": "Tactical Idealist",
+        "description": "Punya nilai kuat dan rencana tajam — membangun dunia sesuai visi.",
+        "profile_vector": {
+            "leftBrain": 55,
+            "rightBrain": 45,
+            "vark": "Visual",
+            "cognitive": "Analitik",
+            "mbti": { "T": 45, "F": 55, "J": 80, "P": 20 }
+        }
+    },
+    {
+        "name": "Creative Organizer",
+        "description": "Pengatur kreatif yang selalu punya ide segar namun tertata.",
+        "profile_vector": {
+            "leftBrain": 65,
+            "rightBrain": 35,
+            "vark": "Visual",
+            "cognitive": "Hybrid",
+            "mbti": { "T": 50, "F": 50, "J": 70, "P": 30 }
+        }
+    },
+    {
+        "name": "Practical Philosopher",
+        "description": "Berpikir dalam — dan mempraktikkan dalam kehidupan nyata.",
+        "profile_vector": {
+            "leftBrain": 60,
+            "rightBrain": 40,
+            "vark": "Read/Write",
+            "cognitive": "Analitik",
+            "mbti": { "T": 60, "F": 40, "J": 65, "P": 35 }
+        }
+    },
+    {
+        "name": "Sensitive Strategist",
+        "description": "Menyusun langkah dengan hati dan intuisi tajam.",
+        "profile_vector": {
+            "leftBrain": 40,
+            "rightBrain": 60,
+            "vark": "Kinesthetic",
+            "cognitive": "Hybrid",
+            "mbti": { "T": 35, "F": 65, "J": 60, "P": 40 }
+        }
+    },
+    {
+        "name": "Flow Architect",
+        "description": "Mengatur alur, memandu energi, dan menata pengalaman.",
+        "profile_vector": {
+            "leftBrain": 50,
+            "rightBrain": 50,
+            "vark": "Auditory",
+            "cognitive": "Hybrid",
+            "mbti": { "T": 55, "F": 45, "J": 55, "P": 45 }
+        }
+    }
+]
