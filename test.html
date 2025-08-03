@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Kognitif - MINDWAY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Header minimalis -->
+        <div class="test-header">
+            <div class="logo">MW</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <span id="progressText">Soal 1/50</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="test-container">
+        <div class="question-card">
+            <div class="question-statement" id="questionStatement">
+                <!-- Pertanyaan akan dimuat dinamis -->
+            </div>
+            
+            <div class="options" id="optionsContainer">
+                <!-- Opsi jawaban -->
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button id="prevBtn" disabled>
+                <i class="fas fa-arrow-left"></i> Sebelumnya
+            </button>
+            <button id="nextBtn">
+                Selanjutnya <i class="fas fa-arrow-right"></i>
+            </button>
+            <button id="submitBtn" class="hidden">
+                Selesai <i class="fas fa-check"></i>
+            </button>
+        </div>
+    </main>
+
+    <script src="data/questions.json"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
